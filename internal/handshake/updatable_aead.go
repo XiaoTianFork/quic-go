@@ -8,11 +8,11 @@ import (
 	"github.com/xiaotianfork/qtls-go1-15/x509"
 	"time"
 
-	"github.com/lucas-clemente/quic-go/internal/protocol"
-	"github.com/lucas-clemente/quic-go/internal/qerr"
-	"github.com/lucas-clemente/quic-go/internal/qtls"
-	"github.com/lucas-clemente/quic-go/internal/utils"
-	"github.com/lucas-clemente/quic-go/logging"
+	"github.com/xiaotianfork/quic-go/internal/protocol"
+	"github.com/xiaotianfork/quic-go/internal/qerr"
+	"github.com/xiaotianfork/quic-go/internal/qtls"
+	"github.com/xiaotianfork/quic-go/internal/utils"
+	"github.com/xiaotianfork/quic-go/logging"
 )
 
 // KeyUpdateInterval is the maximum number of packets we send or receive before initiating a key update.

@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/lucas-clemente/quic-go/internal/congestion"
-	"github.com/lucas-clemente/quic-go/internal/protocol"
-	"github.com/lucas-clemente/quic-go/internal/qerr"
-	"github.com/lucas-clemente/quic-go/internal/utils"
-	"github.com/lucas-clemente/quic-go/internal/wire"
-	"github.com/lucas-clemente/quic-go/logging"
+	"github.com/xiaotianfork/quic-go/internal/congestion"
+	"github.com/xiaotianfork/quic-go/internal/protocol"
+	"github.com/xiaotianfork/quic-go/internal/qerr"
+	"github.com/xiaotianfork/quic-go/internal/utils"
+	"github.com/xiaotianfork/quic-go/internal/wire"
+	"github.com/xiaotianfork/quic-go/logging"
 )
 
 const (

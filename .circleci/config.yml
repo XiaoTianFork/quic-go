@@ -16,7 +16,7 @@ executors:
 jobs:
   "test": &test
     executor: test-go115
-    working_directory: /go/src/github.com/lucas-clemente/quic-go
+    working_directory: /go/src/github.com/xiaotianfork/quic-go
     steps:
       - checkout
       - run:

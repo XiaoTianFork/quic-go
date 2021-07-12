@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/lucas-clemente/quic-go/internal/handshake"
-	"github.com/lucas-clemente/quic-go/internal/protocol"
-	"github.com/lucas-clemente/quic-go/internal/wire"
+	"github.com/xiaotianfork/quic-go/internal/handshake"
+	"github.com/xiaotianfork/quic-go/internal/protocol"
+	"github.com/xiaotianfork/quic-go/internal/wire"
 )
 
 type headerDecryptor interface {

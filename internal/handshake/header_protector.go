@@ -9,7 +9,7 @@ import (
 
 	"golang.org/x/crypto/chacha20"
 
-	"github.com/lucas-clemente/quic-go/internal/qtls"
+	"github.com/xiaotianfork/quic-go/internal/qtls"
 )
 
 var TLS_SM4_GCM_SM3 uint16 = 0x00c6
