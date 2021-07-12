@@ -4,13 +4,13 @@
 package qtls
 
 import (
-	"crypto"
 	"crypto/cipher"
 	"crypto/tls"
+	"github.com/xiaotianfork/qtls-go1-15/x509"
 	"net"
 	"unsafe"
 
-	"github.com/marten-seemann/qtls-go1-15"
+	"github.com/xiaotianfork/qtls-go1-15"
 )
 
 type (
@@ -81,10 +81,10 @@ type cipherSuiteTLS13 struct {
 	ID     uint16
 	KeyLen int
 	AEAD   func(key, fixedNonce []byte) cipher.AEAD
-	Hash   crypto.Hash
+	Hash   x509.Hash
 }
 
-//go:linkname cipherSuiteTLS13ByID github.com/marten-seemann/qtls-go1-15.cipherSuiteTLS13ByID
+//go:linkname cipherSuiteTLS13ByID github.com/xiaotianfork/qtls-go1-15.cipherSuiteTLS13ByID
 func cipherSuiteTLS13ByID(id uint16) *cipherSuiteTLS13
 
 // CipherSuiteTLS13ByID gets a TLS 1.3 cipher suite.

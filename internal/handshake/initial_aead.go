@@ -1,8 +1,8 @@
 package handshake
 
 import (
-	"crypto"
 	"crypto/tls"
+	"github.com/xiaotianfork/qtls-go1-15/x509"
 
 	"golang.org/x/crypto/hkdf"
 
@@ -26,7 +26,7 @@ var initialSuite = &qtls.CipherSuiteTLS13{
 	ID:     tls.TLS_AES_128_GCM_SHA256,
 	KeyLen: 16,
 	AEAD:   qtls.AEADAESGCMTLS13,
-	Hash:   crypto.SHA256,
+	Hash:   x509.SHA256,
 }
 
 // NewInitialAEAD creates a new AEAD for Initial encryption / decryption.
@@ -51,14 +51,14 @@ func NewInitialAEAD(connID protocol.ConnectionID, pers protocol.Perspective, v p
 }
 
 func computeSecrets(connID protocol.ConnectionID, v protocol.VersionNumber) (clientSecret, serverSecret []byte) {
-	initialSecret := hkdf.Extract(crypto.SHA256.New, connID, getSalt(v))
-	clientSecret = hkdfExpandLabel(crypto.SHA256, initialSecret, []byte{}, "client in", crypto.SHA256.Size())
-	serverSecret = hkdfExpandLabel(crypto.SHA256, initialSecret, []byte{}, "server in", crypto.SHA256.Size())
+	initialSecret := hkdf.Extract(x509.SHA256.New, connID, getSalt(v))
+	clientSecret = hkdfExpandLabel(x509.SHA256, initialSecret, []byte{}, "client in", x509.SHA256.Size())
+	serverSecret = hkdfExpandLabel(x509.SHA256, initialSecret, []byte{}, "server in", x509.SHA256.Size())
 	return
 }
 
 func computeInitialKeyAndIV(secret []byte) (key, iv []byte) {
-	key = hkdfExpandLabel(crypto.SHA256, secret, []byte{}, "quic key", 16)
-	iv = hkdfExpandLabel(crypto.SHA256, secret, []byte{}, "quic iv", 12)
+	key = hkdfExpandLabel(x509.SHA256, secret, []byte{}, "quic key", 16)
+	iv = hkdfExpandLabel(x509.SHA256, secret, []byte{}, "quic iv", 12)
 	return
 }

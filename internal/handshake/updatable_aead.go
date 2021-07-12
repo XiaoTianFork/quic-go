@@ -1,11 +1,11 @@
 package handshake
 
 import (
-	"crypto"
 	"crypto/cipher"
 	"crypto/tls"
 	"encoding/binary"
 	"fmt"
+	"github.com/xiaotianfork/qtls-go1-15/x509"
 	"time"
 
 	"github.com/lucas-clemente/quic-go/internal/protocol"
@@ -110,7 +110,7 @@ func (a *updatableAEAD) startKeyDropTimer(now time.Time) {
 	a.prevRcvAEADExpiry = now.Add(d)
 }
 
-func (a *updatableAEAD) getNextTrafficSecret(hash crypto.Hash, ts []byte) []byte {
+func (a *updatableAEAD) getNextTrafficSecret(hash x509.Hash, ts []byte) []byte {
 	return hkdfExpandLabel(hash, ts, []byte{}, "quic ku", hash.Size())
 }
 
@@ -145,7 +145,7 @@ func (a *updatableAEAD) setAEADParameters(aead cipher.AEAD, suite *qtls.CipherSu
 	a.aeadOverhead = aead.Overhead()
 	a.suite = suite
 	switch suite.ID {
-	case tls.TLS_AES_128_GCM_SHA256, tls.TLS_AES_256_GCM_SHA384:
+	case tls.TLS_AES_128_GCM_SHA256, tls.TLS_AES_256_GCM_SHA384, TLS_SM4_GCM_SM3:
 		a.invalidPacketLimit = protocol.InvalidPacketLimitAES
 	case tls.TLS_CHACHA20_POLY1305_SHA256:
 		a.invalidPacketLimit = protocol.InvalidPacketLimitChaCha
