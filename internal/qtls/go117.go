@@ -3,13 +3,13 @@
 package qtls
 
 import (
-	"crypto"
 	"crypto/cipher"
 	"crypto/tls"
 	"net"
 	"unsafe"
 
-	"github.com/marten-seemann/qtls-go1-17"
+	"github.com/xiaotianfork/qtls-go1-15"
+	"github.com/xiaotianfork/qtls-go1-17/x509"
 )
 
 type (
@@ -80,7 +80,7 @@ type cipherSuiteTLS13 struct {
 	ID     uint16
 	KeyLen int
 	AEAD   func(key, fixedNonce []byte) cipher.AEAD
-	Hash   crypto.Hash
+	Hash   x509.Hash
 }
 
 //go:linkname cipherSuiteTLS13ByID github.com/marten-seemann/qtls-go1-17.cipherSuiteTLS13ByID

@@ -6,10 +6,10 @@ package qtls
 import (
 	"crypto/cipher"
 	"crypto/tls"
-	"github.com/xiaotianfork/qtls-go1-15/x509"
 	"net"
 	"unsafe"
 
+	"github.com/xiaotianfork/qtls-go1-15/x509"
 	"github.com/xiaotianfork/qtls-go1-15"
 )
 
