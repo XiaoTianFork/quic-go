@@ -2,7 +2,7 @@ package handshake
 
 import (
 	"crypto/tls"
-	"github.com/xiaotianfork/qtls-go1-15/x509"
+	"github.com/xiaotianfork/q-tls-common/x509"
 
 	"golang.org/x/crypto/hkdf"
 

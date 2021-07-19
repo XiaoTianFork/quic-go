@@ -5,7 +5,7 @@ import (
 	"crypto/tls"
 	"encoding/binary"
 	"fmt"
-	"github.com/xiaotianfork/qtls-go1-15/x509"
+	"github.com/xiaotianfork/q-tls-common/x509"
 	"time"
 
 	"github.com/xiaotianfork/quic-go/internal/protocol"

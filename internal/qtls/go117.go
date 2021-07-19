@@ -8,8 +8,8 @@ import (
 	"net"
 	"unsafe"
 
-	"github.com/xiaotianfork/qtls-go1-15"
-	"github.com/xiaotianfork/qtls-go1-17/x509"
+	"github.com/xiaotianfork/q-tls-common/x509"
+	"github.com/xiaotianfork/qtls-go1-17"
 )
 
 type (
