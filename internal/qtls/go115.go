@@ -84,6 +84,10 @@ type cipherSuiteTLS13 struct {
 	Hash   x509.Hash
 }
 
+func X509KeyPair(certPEMBlock, keyPEMBlock []byte) (Certificate, error) {
+	return qtls.X509KeyPair(certPEMBlock, keyPEMBlock)
+}
+
 //go:linkname cipherSuiteTLS13ByID github.com/xiaotianfork/qtls-go1-15.cipherSuiteTLS13ByID
 func cipherSuiteTLS13ByID(id uint16) *cipherSuiteTLS13
 
