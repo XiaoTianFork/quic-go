@@ -9,10 +9,10 @@ require (
 	github.com/marten-seemann/qpack v0.2.1
 	github.com/onsi/ginkgo v1.16.4
 	github.com/onsi/gomega v1.13.0
-	github.com/xiaotianfork/q-tls-common v0.0.8
-	github.com/xiaotianfork/qtls-go1-15 v0.1.13
-	github.com/xiaotianfork/qtls-go1-16 v0.1.13
-	github.com/xiaotianfork/qtls-go1-17 v0.1.13
+	github.com/xiaotianfork/q-tls-common v0.0.10
+	github.com/xiaotianfork/qtls-go1-15 v0.1.14
+	github.com/xiaotianfork/qtls-go1-16 v0.1.14
+	github.com/xiaotianfork/qtls-go1-17 v0.1.14
 	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97
 	golang.org/x/net v0.0.0-20210428140749-89ef3d95e781
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c
