@@ -10,6 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/xiaotianfork/q-tls-common/x509"
+	"github.com/xiaotianfork/qtls-go1-16"
 )
 
 type (
