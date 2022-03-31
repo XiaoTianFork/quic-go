@@ -2,11 +2,10 @@ package testdata
 
 import (
 	"crypto/tls"
+	"crypto/x509"
 	"io/ioutil"
 	"path"
 	"runtime"
-
-	"github.com/xiaotianfork/q-tls-common/x509"
 )
 
 var certPath string

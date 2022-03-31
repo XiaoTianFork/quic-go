@@ -3,6 +3,7 @@
   <component name="Go" enabled="true">
     <buildTags>
       <option name="os" value="linux" />
+      <option name="goVersion" value="go1.17" />
     </buildTags>
   </component>
   <component name="NewModuleRootManager">
