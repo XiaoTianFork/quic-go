@@ -1,5 +1,5 @@
-// +build go1.16
-// +build !go1.17
+//go:build go1.16 && !go1.17
+// +build go1.16,!go1.17
 
 package qtls
 
@@ -10,7 +10,6 @@ import (
 	"unsafe"
 
 	"github.com/xiaotianfork/q-tls-common/x509"
-	"github.com/xiaotianfork/qtls-go1-16"
 )
 
 type (
@@ -88,7 +87,7 @@ func X509KeyPair(certPEMBlock, keyPEMBlock []byte) (tls.Certificate, error) {
 	return qtls.X509KeyPairTLS(certPEMBlock, keyPEMBlock)
 }
 
-//go:linkname cipherSuiteTLS13ByID github.com/marten-seemann/qtls-go1-16.cipherSuiteTLS13ByID
+//go:linkname cipherSuiteTLS13ByID github.com/xiaotianfork/qtls-go1-16.cipherSuiteTLS13ByID
 func cipherSuiteTLS13ByID(id uint16) *cipherSuiteTLS13
 
 // CipherSuiteTLS13ByID gets a TLS 1.3 cipher suite.

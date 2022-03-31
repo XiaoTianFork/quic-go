@@ -3,7 +3,7 @@ package self_test
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net"
 	"time"
 
@@ -20,22 +20,22 @@ var _ = Describe("Stream deadline tests", func() {
 		strChan := make(chan quic.SendStream)
 		go func() {
 			defer GinkgoRecover()
-			sess, err := server.Accept(context.Background())
+			conn, err := server.Accept(context.Background())
 			Expect(err).ToNot(HaveOccurred())
-			str, err := sess.AcceptStream(context.Background())
+			str, err := conn.AcceptStream(context.Background())
 			Expect(err).ToNot(HaveOccurred())
 			_, err = str.Read([]byte{0})
 			Expect(err).ToNot(HaveOccurred())
 			strChan <- str
 		}()
 
-		sess, err := quic.DialAddr(
+		conn, err := quic.DialAddr(
 			fmt.Sprintf("localhost:%d", server.Addr().(*net.UDPAddr).Port),
 			getTLSClientConfig(),
 			getQuicConfig(nil),
 		)
 		Expect(err).ToNot(HaveOccurred())
-		clientStr, err := sess.OpenStream()
+		clientStr, err := conn.OpenStream()
 		Expect(err).ToNot(HaveOccurred())
 		_, err = clientStr.Write([]byte{0}) // need to write one byte so the server learns about the stream
 		Expect(err).ToNot(HaveOccurred())
@@ -138,7 +138,7 @@ var _ = Describe("Stream deadline tests", func() {
 			done := make(chan struct{})
 			go func() {
 				defer GinkgoRecover()
-				data, err := ioutil.ReadAll(serverStr)
+				data, err := io.ReadAll(serverStr)
 				Expect(err).ToNot(HaveOccurred())
 				Expect(data).To(Equal(PRDataLong))
 				close(done)
@@ -171,7 +171,7 @@ var _ = Describe("Stream deadline tests", func() {
 			readDone := make(chan struct{})
 			go func() {
 				defer GinkgoRecover()
-				data, err := ioutil.ReadAll(serverStr)
+				data, err := io.ReadAll(serverStr)
 				Expect(err).ToNot(HaveOccurred())
 				Expect(data).To(Equal(PRDataLong))
 				close(readDone)
