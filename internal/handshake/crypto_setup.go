@@ -220,6 +220,7 @@ func NewCryptoSetupServer(
 }
 
 func fromConfig(c *tls.Config) *qtls.Config {
+	//todo sfl type convert error
 	return (*qtls.Config)(unsafe.Pointer(c))
 }
 
