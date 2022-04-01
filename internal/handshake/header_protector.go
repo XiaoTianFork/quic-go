@@ -9,8 +9,10 @@ import (
 
 	"golang.org/x/crypto/chacha20"
 
-	"github.com/lucas-clemente/quic-go/internal/qtls"
+	"github.com/xiaotianfork/quic-go/internal/qtls"
 )
+
+var TLS_SM4_GCM_SM3 uint16 = 0x00c6
 
 type headerProtector interface {
 	EncryptHeader(sample []byte, firstByte *byte, hdrBytes []byte)
@@ -19,7 +21,7 @@ type headerProtector interface {
 
 func newHeaderProtector(suite *qtls.CipherSuiteTLS13, trafficSecret []byte, isLongHeader bool) headerProtector {
 	switch suite.ID {
-	case tls.TLS_AES_128_GCM_SHA256, tls.TLS_AES_256_GCM_SHA384:
+	case tls.TLS_AES_128_GCM_SHA256, tls.TLS_AES_256_GCM_SHA384, TLS_SM4_GCM_SM3:
 		return newAESHeaderProtector(suite, trafficSecret, isLongHeader)
 	case tls.TLS_CHACHA20_POLY1305_SHA256:
 		return newChaChaHeaderProtector(suite, trafficSecret, isLongHeader)

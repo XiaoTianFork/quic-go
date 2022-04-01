@@ -1,16 +1,16 @@
 package handshake
 
 import (
-	"crypto"
 	"encoding/binary"
-
 	"golang.org/x/crypto/hkdf"
+
+	"github.com/xiaotianfork/q-tls-common/x509"
 )
 
 // hkdfExpandLabel HKDF expands a label.
 // Since this implementation avoids using a cryptobyte.Builder, it is about 15% faster than the
 // hkdfExpandLabel in the standard library.
-func hkdfExpandLabel(hash crypto.Hash, secret, context []byte, label string, length int) []byte {
+func hkdfExpandLabel(hash x509.Hash, secret, context []byte, label string, length int) []byte {
 	b := make([]byte, 3, 3+6+len(label)+1+len(context))
 	binary.BigEndian.PutUint16(b, uint16(length))
 	b[2] = uint8(6 + len(label))

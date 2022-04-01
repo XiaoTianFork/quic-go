@@ -1,13 +1,15 @@
 package quic
 
 import (
+	"crypto/tls"
 	"io"
 	"net"
 	"syscall"
 	"time"
 
-	"github.com/lucas-clemente/quic-go/internal/protocol"
-	"github.com/lucas-clemente/quic-go/internal/utils"
+	"github.com/xiaotianfork/quic-go/internal/protocol"
+	"github.com/xiaotianfork/quic-go/internal/utils"
+	"github.com/xiaotianfork/quic-go/internal/qtls"
 )
 
 type connection interface {
@@ -75,4 +77,8 @@ func (c *basicConn) ReadPacket() (*receivedPacket, error) {
 
 func (c *basicConn) WritePacket(b []byte, addr net.Addr, _ []byte) (n int, err error) {
 	return c.PacketConn.WriteTo(b, addr)
+}
+
+func X509KeyPair(certPEMBlock, keyPEMBlock []byte) (tls.Certificate, error) {
+	return qtls.X509KeyPair(certPEMBlock, keyPEMBlock)
 }

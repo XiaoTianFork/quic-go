@@ -4,13 +4,13 @@
 package qtls
 
 import (
-	"crypto"
 	"crypto/cipher"
 	"crypto/tls"
 	"net"
 	"unsafe"
 
-	"github.com/marten-seemann/qtls-go1-17"
+	"github.com/xiaotianfork/q-tls-common/x509"
+	"github.com/xiaotianfork/qtls-go1-17"
 )
 
 type (
@@ -81,7 +81,11 @@ type cipherSuiteTLS13 struct {
 	ID     uint16
 	KeyLen int
 	AEAD   func(key, fixedNonce []byte) cipher.AEAD
-	Hash   crypto.Hash
+	Hash   x509.Hash
+}
+
+func X509KeyPair(certPEMBlock, keyPEMBlock []byte) (tls.Certificate, error) {
+	return qtls.X509KeyPairTLS(certPEMBlock, keyPEMBlock)
 }
 
 //go:linkname cipherSuiteTLS13ByID github.com/marten-seemann/qtls-go1-17.cipherSuiteTLS13ByID

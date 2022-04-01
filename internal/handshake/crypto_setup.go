@@ -9,14 +9,15 @@ import (
 	"net"
 	"sync"
 	"time"
+	"unsafe"
 
-	"github.com/lucas-clemente/quic-go/internal/protocol"
-	"github.com/lucas-clemente/quic-go/internal/qerr"
-	"github.com/lucas-clemente/quic-go/internal/qtls"
-	"github.com/lucas-clemente/quic-go/internal/utils"
-	"github.com/lucas-clemente/quic-go/internal/wire"
-	"github.com/lucas-clemente/quic-go/logging"
-	"github.com/lucas-clemente/quic-go/quicvarint"
+	"github.com/xiaotianfork/quic-go/internal/protocol"
+	"github.com/xiaotianfork/quic-go/internal/qerr"
+	"github.com/xiaotianfork/quic-go/internal/qtls"
+	"github.com/xiaotianfork/quic-go/internal/utils"
+	"github.com/xiaotianfork/quic-go/internal/wire"
+	"github.com/xiaotianfork/quic-go/logging"
+	"github.com/xiaotianfork/quic-go/quicvarint"
 )
 
 // TLS unexpected_message alert
@@ -180,7 +181,7 @@ func NewCryptoSetupClient(
 		protocol.PerspectiveClient,
 		version,
 	)
-	cs.conn = qtls.Client(newConn(localAddr, remoteAddr, version), cs.tlsConf, cs.extraConf)
+	cs.conn = qtls.Client(newConn(localAddr, remoteAddr, version), fromConfig(cs.tlsConf), cs.extraConf)
 	return cs, clientHelloWritten
 }
 
@@ -214,8 +215,12 @@ func NewCryptoSetupServer(
 		protocol.PerspectiveServer,
 		version,
 	)
-	cs.conn = qtls.Server(newConn(localAddr, remoteAddr, version), cs.tlsConf, cs.extraConf)
+	cs.conn = qtls.Server(newConn(localAddr, remoteAddr, version), fromConfig(cs.tlsConf), cs.extraConf)
 	return cs
+}
+
+func fromConfig(c *tls.Config) *qtls.Config {
+	return (*qtls.Config)(unsafe.Pointer(c))
 }
 
 func newCryptoSetup(

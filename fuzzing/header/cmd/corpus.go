@@ -5,10 +5,10 @@ import (
 	"log"
 	"math/rand"
 
-	"github.com/lucas-clemente/quic-go/fuzzing/header"
-	"github.com/lucas-clemente/quic-go/fuzzing/internal/helper"
-	"github.com/lucas-clemente/quic-go/internal/protocol"
-	"github.com/lucas-clemente/quic-go/internal/wire"
+	"github.com/xiaotianfork/quic-go/fuzzing/header"
+	"github.com/xiaotianfork/quic-go/fuzzing/internal/helper"
+	"github.com/xiaotianfork/quic-go/internal/protocol"
+	"github.com/xiaotianfork/quic-go/internal/wire"
 )
 
 const version = protocol.VersionTLS
