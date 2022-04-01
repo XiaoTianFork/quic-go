@@ -2,9 +2,9 @@ package handshake
 
 import (
 	"encoding/binary"
-	"golang.org/x/crypto/hkdf"
 
 	"github.com/xiaotianfork/q-tls-common/x509"
+	"golang.org/x/crypto/hkdf"
 )
 
 // hkdfExpandLabel HKDF expands a label.
