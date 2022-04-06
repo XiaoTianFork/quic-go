@@ -1,11 +1,16 @@
 package qerr
 
 import (
+	"errors"
 	"fmt"
 	"net"
 
 	"github.com/xiaotianfork/quic-go/internal/protocol"
 )
+
+// errNetClosing is copy from go 1.16 poll.ErrNetClosing for support go1.15
+// warning: should use net.ErrClosed replace it when go version is 16+
+var errNetClosing = errors.New("use of closed network connection")
 
 var (
 	ErrHandshakeTimeout = &HandshakeTimeoutError{}
@@ -45,14 +50,14 @@ func (e *TransportError) Error() string {
 }
 
 func (e *TransportError) Is(target error) bool {
-	return target == net.ErrClosed
+	return target.Error() == errNetClosing.Error()
 }
 
 // An ApplicationErrorCode is an application-defined error code.
 type ApplicationErrorCode uint64
 
 func (e *ApplicationError) Is(target error) bool {
-	return target == net.ErrClosed
+	return target.Error() == errNetClosing.Error()
 }
 
 // A StreamErrorCode is an error code used to cancel streams.
@@ -80,7 +85,7 @@ var _ error = &IdleTimeoutError{}
 func (e *IdleTimeoutError) Timeout() bool        { return true }
 func (e *IdleTimeoutError) Temporary() bool      { return false }
 func (e *IdleTimeoutError) Error() string        { return "timeout: no recent network activity" }
-func (e *IdleTimeoutError) Is(target error) bool { return target == net.ErrClosed }
+func (e *IdleTimeoutError) Is(target error) bool { return target.Error() == errNetClosing.Error() }
 
 type HandshakeTimeoutError struct{}
 
@@ -89,7 +94,7 @@ var _ error = &HandshakeTimeoutError{}
 func (e *HandshakeTimeoutError) Timeout() bool        { return true }
 func (e *HandshakeTimeoutError) Temporary() bool      { return false }
 func (e *HandshakeTimeoutError) Error() string        { return "timeout: handshake did not complete in time" }
-func (e *HandshakeTimeoutError) Is(target error) bool { return target == net.ErrClosed }
+func (e *HandshakeTimeoutError) Is(target error) bool { return target.Error() == errNetClosing.Error() }
 
 // A VersionNegotiationError occurs when the client and the server can't agree on a QUIC version.
 type VersionNegotiationError struct {
@@ -102,7 +107,7 @@ func (e *VersionNegotiationError) Error() string {
 }
 
 func (e *VersionNegotiationError) Is(target error) bool {
-	return target == net.ErrClosed
+	return target.Error() == errNetClosing.Error()
 }
 
 // A StatelessResetError occurs when we receive a stateless reset.
@@ -117,7 +122,7 @@ func (e *StatelessResetError) Error() string {
 }
 
 func (e *StatelessResetError) Is(target error) bool {
-	return target == net.ErrClosed
+	return target.Error() == errNetClosing.Error()
 }
 
 func (e *StatelessResetError) Timeout() bool   { return false }

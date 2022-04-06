@@ -5,6 +5,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net"
 	"net/http"
 	"strconv"
@@ -145,7 +146,7 @@ var _ = Describe("HTTP3 Server hotswap test", func() {
 				resp, err := client.Get("https://localhost:" + port + "/hello1")
 				Expect(err).ToNot(HaveOccurred())
 				Expect(resp.StatusCode).To(Equal(200))
-				body, err := io.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
+				body, err := ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
 				Expect(err).ToNot(HaveOccurred())
 				Expect(string(body)).To(Equal("Hello, World 1!\n"))
 
@@ -175,7 +176,7 @@ var _ = Describe("HTTP3 Server hotswap test", func() {
 				resp, err = client.Get("https://localhost:" + port + "/hello2")
 				Expect(err).ToNot(HaveOccurred())
 				Expect(resp.StatusCode).To(Equal(200))
-				body, err = io.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
+				body, err = ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
 				Expect(err).ToNot(HaveOccurred())
 				Expect(string(body)).To(Equal("Hello, World 2!\n"))
 

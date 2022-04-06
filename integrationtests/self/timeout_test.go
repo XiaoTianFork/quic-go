@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"io/ioutil"
 	mrand "math/rand"
 	"net"
 	"runtime/pprof"
@@ -409,7 +410,7 @@ var _ = Describe("Timeout tests", func() {
 			if err != nil {
 				return err
 			}
-			data, err := io.ReadAll(str)
+			data, err := ioutil.ReadAll(str)
 			if err != nil {
 				return err
 			}

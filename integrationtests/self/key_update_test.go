@@ -3,7 +3,7 @@ package self_test
 import (
 	"context"
 	"fmt"
-	"io"
+	"io/ioutil"
 	"net"
 
 	quic "github.com/xiaotianfork/quic-go"
@@ -90,7 +90,7 @@ var _ = Describe("Key Update tests", func() {
 		Expect(err).ToNot(HaveOccurred())
 		str, err := sess.AcceptUniStream(context.Background())
 		Expect(err).ToNot(HaveOccurred())
-		data, err := io.ReadAll(str)
+		data, err := ioutil.ReadAll(str)
 		Expect(err).ToNot(HaveOccurred())
 		Expect(data).To(Equal(PRDataLong))
 		Expect(sess.CloseWithError(0, "")).To(Succeed())

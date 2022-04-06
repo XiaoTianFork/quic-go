@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net"
 	"net/http"
 	"strconv"
@@ -62,7 +63,7 @@ var _ = Describe("HTTP tests", func() {
 
 		mux.HandleFunc("/echo", func(w http.ResponseWriter, r *http.Request) {
 			defer GinkgoRecover()
-			body, err := io.ReadAll(r.Body)
+			body, err := ioutil.ReadAll(r.Body)
 			Expect(err).NotTo(HaveOccurred())
 			w.Write(body) // don't check the error here. Stream may be reset.
 		})
@@ -118,7 +119,7 @@ var _ = Describe("HTTP tests", func() {
 				resp, err := client.Get("https://localhost:" + port + "/hello")
 				Expect(err).ToNot(HaveOccurred())
 				Expect(resp.StatusCode).To(Equal(200))
-				body, err := io.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
+				body, err := ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
 				Expect(err).ToNot(HaveOccurred())
 				Expect(string(body)).To(Equal("Hello, World!\n"))
 			})
@@ -160,7 +161,7 @@ var _ = Describe("HTTP tests", func() {
 				resp, err := client.Get("https://localhost:" + port + "/prdata")
 				Expect(err).ToNot(HaveOccurred())
 				Expect(resp.StatusCode).To(Equal(200))
-				body, err := io.ReadAll(gbytes.TimeoutReader(resp.Body, 5*time.Second))
+				body, err := ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 5*time.Second))
 				Expect(err).ToNot(HaveOccurred())
 				Expect(body).To(Equal(PRData))
 			})
@@ -169,7 +170,7 @@ var _ = Describe("HTTP tests", func() {
 				resp, err := client.Get("https://localhost:" + port + "/prdatalong")
 				Expect(err).ToNot(HaveOccurred())
 				Expect(resp.StatusCode).To(Equal(200))
-				body, err := io.ReadAll(gbytes.TimeoutReader(resp.Body, 20*time.Second))
+				body, err := ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 20*time.Second))
 				Expect(err).ToNot(HaveOccurred())
 				Expect(body).To(Equal(PRDataLong))
 			})
@@ -181,7 +182,7 @@ var _ = Describe("HTTP tests", func() {
 					resp, err := client.Get("https://localhost:" + port + "/hello")
 					Expect(err).ToNot(HaveOccurred())
 					Expect(resp.StatusCode).To(Equal(200))
-					body, err := io.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
+					body, err := ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
 					Expect(err).ToNot(HaveOccurred())
 					Expect(string(body)).To(Equal("Hello, World!\n"))
 				}
@@ -206,7 +207,7 @@ var _ = Describe("HTTP tests", func() {
 				)
 				Expect(err).ToNot(HaveOccurred())
 				Expect(resp.StatusCode).To(Equal(200))
-				body, err := io.ReadAll(gbytes.TimeoutReader(resp.Body, 5*time.Second))
+				body, err := ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 5*time.Second))
 				Expect(err).ToNot(HaveOccurred())
 				Expect(body).To(Equal([]byte("Hello, world!")))
 			})
@@ -219,7 +220,7 @@ var _ = Describe("HTTP tests", func() {
 				)
 				Expect(err).ToNot(HaveOccurred())
 				Expect(resp.StatusCode).To(Equal(200))
-				body, err := io.ReadAll(gbytes.TimeoutReader(resp.Body, 5*time.Second))
+				body, err := ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 5*time.Second))
 				Expect(err).ToNot(HaveOccurred())
 				Expect(body).To(Equal(PRData))
 			})
@@ -242,7 +243,7 @@ var _ = Describe("HTTP tests", func() {
 				Expect(resp.StatusCode).To(Equal(200))
 				Expect(resp.Uncompressed).To(BeTrue())
 
-				body, err := io.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
+				body, err := ioutil.ReadAll(gbytes.TimeoutReader(resp.Body, 3*time.Second))
 				Expect(err).ToNot(HaveOccurred())
 				Expect(string(body)).To(Equal("Hello, World!\n"))
 			})

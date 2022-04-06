@@ -3,7 +3,7 @@ package self_test
 import (
 	"context"
 	"fmt"
-	"io"
+	"io/ioutil"
 	"net"
 	"runtime"
 	"time"
@@ -52,7 +52,7 @@ var _ = Describe("Multiplexing", func() {
 				defer sess.CloseWithError(0, "")
 				str, err := sess.AcceptStream(context.Background())
 				Expect(err).ToNot(HaveOccurred())
-				data, err := io.ReadAll(str)
+				data, err := ioutil.ReadAll(str)
 				Expect(err).ToNot(HaveOccurred())
 				Expect(data).To(Equal(PRData))
 			}

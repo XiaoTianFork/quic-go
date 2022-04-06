@@ -4,9 +4,9 @@ import (
 	"errors"
 	"net"
 
-	"github.com/xiaotianfork/quic-go/internal/protocol"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.com/xiaotianfork/quic-go/internal/protocol"
 )
 
 var _ = Describe("QUIC Errors", func() {
@@ -117,11 +117,11 @@ var _ = Describe("QUIC Errors", func() {
 	})
 
 	It("says that errors are net.ErrClosed errors", func() {
-		Expect(errors.Is(&TransportError{}, net.ErrClosed)).To(BeTrue())
-		Expect(errors.Is(&ApplicationError{}, net.ErrClosed)).To(BeTrue())
-		Expect(errors.Is(&IdleTimeoutError{}, net.ErrClosed)).To(BeTrue())
-		Expect(errors.Is(&HandshakeTimeoutError{}, net.ErrClosed)).To(BeTrue())
-		Expect(errors.Is(&StatelessResetError{}, net.ErrClosed)).To(BeTrue())
-		Expect(errors.Is(&VersionNegotiationError{}, net.ErrClosed)).To(BeTrue())
+		Expect(errors.Is(&TransportError{}, errNetClosing)).To(BeTrue())
+		Expect(errors.Is(&ApplicationError{}, errNetClosing)).To(BeTrue())
+		Expect(errors.Is(&IdleTimeoutError{}, errNetClosing)).To(BeTrue())
+		Expect(errors.Is(&HandshakeTimeoutError{}, errNetClosing)).To(BeTrue())
+		Expect(errors.Is(&StatelessResetError{}, errNetClosing)).To(BeTrue())
+		Expect(errors.Is(&VersionNegotiationError{}, errNetClosing)).To(BeTrue())
 	})
 })

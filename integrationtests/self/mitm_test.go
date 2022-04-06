@@ -5,20 +5,20 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"io"
+	"io/ioutil"
 	"math"
 	mrand "math/rand"
 	"net"
 	"sync/atomic"
 	"time"
 
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
 	"github.com/xiaotianfork/quic-go"
 	quicproxy "github.com/xiaotianfork/quic-go/integrationtests/tools/proxy"
 	"github.com/xiaotianfork/quic-go/internal/protocol"
 	"github.com/xiaotianfork/quic-go/internal/testutils"
 	"github.com/xiaotianfork/quic-go/internal/wire"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
 )
 
 var _ = Describe("MITM test", func() {
@@ -136,7 +136,7 @@ var _ = Describe("MITM test", func() {
 						Expect(err).ToNot(HaveOccurred())
 						str, err := sess.AcceptUniStream(context.Background())
 						Expect(err).ToNot(HaveOccurred())
-						data, err := io.ReadAll(str)
+						data, err := ioutil.ReadAll(str)
 						Expect(err).ToNot(HaveOccurred())
 						Expect(data).To(Equal(PRData))
 						Expect(sess.CloseWithError(0, "")).To(Succeed())
@@ -182,7 +182,7 @@ var _ = Describe("MITM test", func() {
 					Expect(err).ToNot(HaveOccurred())
 					str, err := sess.AcceptUniStream(context.Background())
 					Expect(err).ToNot(HaveOccurred())
-					data, err := io.ReadAll(str)
+					data, err := ioutil.ReadAll(str)
 					Expect(err).ToNot(HaveOccurred())
 					Expect(data).To(Equal(PRData))
 					Expect(sess.CloseWithError(0, "")).To(Succeed())
