@@ -3,18 +3,16 @@ package quicproxy
 import (
 	"bytes"
 	"fmt"
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
+	"github.com/xiaotianfork/quic-go/internal/protocol"
+	"github.com/xiaotianfork/quic-go/internal/wire"
 	"net"
 	"runtime/pprof"
 	"strconv"
 	"strings"
 	"sync/atomic"
 	"time"
-
-	"github.com/xiaotianfork/quic-go/internal/protocol"
-	"github.com/xiaotianfork/quic-go/internal/wire"
-
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
 )
 
 type packetData []byte
@@ -70,7 +68,7 @@ var _ = Describe("QUIC Proxy", func() {
 			addr, err := net.ResolveUDPAddr("udp", "localhost:"+strconv.Itoa(proxy.LocalPort()))
 			Expect(err).ToNot(HaveOccurred())
 			_, err = net.ListenUDP("udp", addr)
-			Expect(err).To(MatchError(fmt.Sprintf("listen udp 127.0.0.1:%d: bind: address already in use", proxy.LocalPort())))
+			Expect(err.Error()).To(HavePrefix(fmt.Sprintf("listen udp 127.0.0.1:%d: bind", proxy.LocalPort())))
 			Expect(proxy.Close()).To(Succeed()) // stopping is tested in the next test
 		})
 
