@@ -10,6 +10,7 @@ require (
 	github.com/onsi/ginkgo v1.16.4
 	github.com/onsi/gomega v1.13.0
 	github.com/xiaotianfork/q-tls-common v0.1.3
+	github.com/xiaotianfork/qtls-go1-15 v0.1.18
 	github.com/xiaotianfork/qtls-go1-16 v0.1.18
 	github.com/xiaotianfork/qtls-go1-17 v0.1.18
 	github.com/xiaotianfork/qtls-go1-18 v0.1.18

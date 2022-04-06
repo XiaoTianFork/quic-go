@@ -142,6 +142,8 @@ github.com/viant/assertly v0.4.8/go.mod h1:aGifi++jvCrUaklKEKT0BU95igDNaqkvz+49u
 github.com/viant/toolbox v0.24.0/go.mod h1:OxMCG57V0PXuIP2HNQrtJf2CjqdmbrOx5EkMILuUhzM=
 github.com/xiaotianfork/q-tls-common v0.1.3 h1:RnvG9+8s0wcK6EWoiI1TPLLTeVCpfFd3ItHXLOaLMcI=
 github.com/xiaotianfork/q-tls-common v0.1.3/go.mod h1:Ao5BDQJ1aJ0e/2izi2mPhtYviRiSeK3kBTQ/k8F+X98=
+github.com/xiaotianfork/qtls-go1-15 v0.1.18 h1:Tst25iyOljqYzat+VOJ6Ul2CUkS+z3Eb5I2C0r+/v4U=
+github.com/xiaotianfork/qtls-go1-15 v0.1.18/go.mod h1:ZMqOWCaes25+Mk5vAs98kqJivsyWKJoIrQ4dI1k3o2E=
 github.com/xiaotianfork/qtls-go1-16 v0.1.18 h1:3XMWUB3yktS5ELDsR76u0B75bSvJo5Y1J3TPr0zviKE=
 github.com/xiaotianfork/qtls-go1-16 v0.1.18/go.mod h1:atnRjqPuo3CSEmdGBnX0SIkpTb4wDJtPd2fTILDv03E=
 github.com/xiaotianfork/qtls-go1-17 v0.1.18 h1:pY0pJQer70xiZfTSVQPYdBLjo/AZ8qBLSBBXOCznJLI=
