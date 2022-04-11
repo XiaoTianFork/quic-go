@@ -88,6 +88,10 @@ func X509KeyPair(certPEMBlock, keyPEMBlock []byte) (tls.Certificate, error) {
 	return qtls.X509KeyPairTLS(certPEMBlock, keyPEMBlock)
 }
 
+func LoadX509KeyPair(certFile, keyFile string) (qtls.Certificate, error) {
+	return qtls.LoadX509KeyPair(certFile, keyFile)
+}
+
 //go:linkname cipherSuiteTLS13ByID github.com/xiaotianfork/qtls-go1-16.cipherSuiteTLS13ByID
 func cipherSuiteTLS13ByID(id uint16) *cipherSuiteTLS13
 
